@@ -2,6 +2,7 @@ import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
 import 'package:bottom_bar_matu/bottom_bar_matu.dart';
+import 'package:thedipaar/utils/floatingActionUtils.dart';
 import 'package:thedipaar/view/category_screen.dart';
 import 'package:thedipaar/view/home_screen.dart';
 import 'package:thedipaar/view/offers_screen.dart';
@@ -63,7 +64,8 @@ class _DashBoardState extends State<DashBoard> {
             label: 'Profile',
           ),
         ],
-      )
+      ),
+      floatingActionButton: CircularMenuFAB(),
     );
   }
 
