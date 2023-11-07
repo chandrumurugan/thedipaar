@@ -1,0 +1,12 @@
+com.example.custom_floating_action_button-jetified-window-1.0.0-beta04-0 /Users/creatah/.gradle/caches/transforms-3/25cee5f028ac2a6b79fd6278ff5b59e2/transformed/jetified-window-1.0.0-beta04/res
+com.example.custom_floating_action_button-jetified-annotation-experimental-1.1.0-1 /Users/creatah/.gradle/caches/transforms-3/6c0c163cc77ae6c91f9f7dfcd179c29c/transformed/jetified-annotation-experimental-1.1.0/res
+com.example.custom_floating_action_button-core-1.6.0-2 /Users/creatah/.gradle/caches/transforms-3/7e9df2ac2213a6bd3cef0f2f27870d79/transformed/core-1.6.0/res
+com.example.custom_floating_action_button-jetified-window-java-1.0.0-beta04-3 /Users/creatah/.gradle/caches/transforms-3/ae81e06d24c799147c26814497a2a305/transformed/jetified-window-java-1.0.0-beta04/res
+com.example.custom_floating_action_button-main-4 /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/res
+com.example.custom_floating_action_button-release-5 /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/release/res
+com.example.custom_floating_action_button-pngs-6 /Users/creatah/flutter_src_file/thedipaar/build/custom_floating_action_button/generated/res/pngs/release
+com.example.custom_floating_action_button-resValues-7 /Users/creatah/flutter_src_file/thedipaar/build/custom_floating_action_button/generated/res/resValues/release
+com.example.custom_floating_action_button-rs-8 /Users/creatah/flutter_src_file/thedipaar/build/custom_floating_action_button/generated/res/rs/release
+com.example.custom_floating_action_button-mergeReleaseResources-9 /Users/creatah/flutter_src_file/thedipaar/build/custom_floating_action_button/intermediates/incremental/release/mergeReleaseResources/merged.dir
+com.example.custom_floating_action_button-mergeReleaseResources-10 /Users/creatah/flutter_src_file/thedipaar/build/custom_floating_action_button/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+com.example.custom_floating_action_button-merged_res-11 /Users/creatah/flutter_src_file/thedipaar/build/custom_floating_action_button/intermediates/merged_res/release

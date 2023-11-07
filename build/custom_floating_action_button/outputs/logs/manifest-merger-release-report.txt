@@ -1,0 +1,25 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml:1:1-3:12
+INJECTED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml:1:1-3:12
+INJECTED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml:1:1-3:12
+	package
+		ADDED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml:2:3-54
+		INJECTED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml
+		INJECTED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml:1:11-69
+uses-sdk
+INJECTED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml
+INJECTED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml
+INJECTED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml
+INJECTED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml
+		ADDED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml
+		INJECTED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml
+		ADDED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml
+		INJECTED from /Users/creatah/.pub-cache/hosted/pub.dev/custom_floating_action_button-0.0.3/android/src/main/AndroidManifest.xml
