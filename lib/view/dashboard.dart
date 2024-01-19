@@ -1,12 +1,8 @@
-import 'package:circular_bottom_navigation/tab_item.dart';
 import 'package:flutter/material.dart';
-import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
-import 'package:bottom_bar_matu/bottom_bar_matu.dart';
 import 'package:thedipaar/utils/floatingActionUtils.dart';
-import 'package:thedipaar/view/category_screen.dart';
+import 'package:thedipaar/view/Directory.dart';
+import 'package:thedipaar/view/events.dart';
 import 'package:thedipaar/view/home_screen.dart';
-import 'package:thedipaar/view/offers_screen.dart';
-import 'package:thedipaar/view/profile_screen.dart';
 
 
 
@@ -57,12 +53,12 @@ class _DashBoardState extends State<DashBoard> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.local_offer_sharp),
-            label: 'Categories',
+            label: 'Directory',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_2),
-            label: 'Profile',
-          ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.person_2),
+          //   label: 'Profile',
+          // ),
         ],
       ),
       floatingActionButton: CircularMenuFAB(),
@@ -75,11 +71,11 @@ class _DashBoardState extends State<DashBoard> {
       case 0:
       return const HomeScreen();
       case 1:
-       return const Events();
+       return  Events(back: false,);
       case 2:
-         return const OffersScreen();
-      case 3:
-       return const ProfileScreen();
+         return const DirectoryScreen();
+      // case 3:
+      //  return const ProfileScreen();
       default:
         return Container();
     }

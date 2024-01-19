@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.tekartik.sqflite-mergeReleaseResources-8:/values-mr/values-mr.xml",
+            "map": [
+                {
+                    "source": "/Users/apple/.gradle/caches/transforms-3/2dbdd0d2c2fe9162e8b90fd0788fdb66/transformed/core-1.6.0/res/values-mr/values-mr.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "com.tekartik.sqflite-merged_res-10:/values-mr/values-mr.xml",
+            "map": [
+                {
+                    "source": "/Users/apple/.gradle/caches/transforms-3/2dbdd0d2c2fe9162e8b90fd0788fdb66/transformed/core-1.6.0/res/values-mr/values-mr.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    }
+                }
+            ]
+        }
+    ]
+}

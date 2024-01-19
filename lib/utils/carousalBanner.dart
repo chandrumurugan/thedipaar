@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
 import 'package:thedipaar/constants/imageConstants.dart';
-import 'package:thedipaar/constants/imageConstants.dart';
+import 'package:thedipaar/modal/sponserListModal.dart';
+import 'package:thedipaar/service/web_service.dart';
 
 class BannerView extends StatefulWidget {
   const BannerView({super.key});
@@ -12,36 +13,47 @@ class BannerView extends StatefulWidget {
 
 class _BannerViewState extends State<BannerView> {
 
-    List slideImages = [
-    {
-      "id" : 1,
-      "bannerView" : AppImages.banner1
-    },
-     {
-      "id" : 2,
-      "bannerView" : AppImages.banner2
-    },
-     {
-      "id" : 3,
-      "bannerView" : AppImages.banner3
-    },
-     {
-      "id" : 4,
-      "bannerView" : AppImages.banner4
-    }
+    bool isLoading = false;
+  List<SponsorList> _sponsers = [];
 
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _fetchNews();
+  }
+
+  Future<void> _fetchNews() async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      final news = await webservice.fetchSponserList();
+      setState(() {
+        _sponsers = news;
+
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      // Handle error
+      print('Error: $e');
+    }
+  }
+
+
   int _currendSlider = 0;
 
 
  List<Widget> _bannerViewView() {
     List<Widget> list = [];
-    for (int i = 0; i < slideImages!.length; i++) {
+    for (int i = 0; i < _sponsers!.length; i++) {
       list.add(GestureDetector(
         onTap: () {
       
         },
-        child: Image.asset(slideImages[i]["bannerView"],fit: BoxFit.fill,),
+        child: Image.network("http://52.77.122.228/uploads/sponsor/${_sponsers[i].image}",fit: BoxFit.fill,width: MediaQuery.of(context).size.width,),
       ));
     }
     return list;
@@ -57,7 +69,7 @@ class _BannerViewState extends State<BannerView> {
                         borderRadius: BorderRadius.circular(5),
                         // color: Colors.amber
                       ),
-                      child: slideImages.length > 0
+                      child: _sponsers.length > 0
                           ? CarouselSlider(
                               items: _bannerViewView(),
                               options: CarouselOptions(
@@ -70,10 +82,10 @@ class _BannerViewState extends State<BannerView> {
                                   });
                                 },
                                 enableInfiniteScroll:
-                                    slideImages!.length <= 1 ? false : true,
+                                    _sponsers!.length <= 1 ? false : true,
                                 reverse: false,
                                 autoPlay:
-                                    slideImages!.length <= 1 ? false : true,
+                                    _sponsers!.length <= 1 ? false : true,
                                 autoPlayInterval: Duration(seconds: 5),
                                 autoPlayAnimationDuration:
                                     Duration(milliseconds: 800),

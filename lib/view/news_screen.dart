@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:thedipaar/constants/imageConstants.dart';
 import 'package:dropdown_model_list/dropdown_model_list.dart';
 import 'package:flutter/foundation.dart';
+import 'package:thedipaar/modal/newsCategoryModal.dart';
+import 'package:thedipaar/modal/newsListModal.dart';
+import 'package:thedipaar/utils/loaderUtils.dart';
 import 'package:thedipaar/utils/newsItemContainer.dart';
+import 'package:thedipaar/service/web_service.dart';
 
 class NewsList extends StatefulWidget {
   const NewsList({Key? key}) : super(key: key);
@@ -12,14 +16,68 @@ class NewsList extends StatefulWidget {
 }
 
 class _NewsListState extends State<NewsList> {
-  DropListModel dropListModel = DropListModel([
-    OptionItem(id: "1", title: "All"),
-    OptionItem(id: "2", title: "World"),
-    OptionItem(id: "3", title: "Technology"),
-    OptionItem(id: "4", title: "Business"),
-    OptionItem(id: "5", title: "Sports"),
-  ]);
+  List<NewsListModal> _newsList = [];
+   List<NewsCategory> _newsCategory = [];
+  bool showList = false;
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _fetchNewsCategory();
+  }
+
+ DropListModel? dropListModel;
   OptionItem optionItemSelected = OptionItem(title: "Select categories");
+
+
+    Future<void> _fetchNewsCategory() async {
+    setState(() {
+      isLoading = true;
+    });
+    try {
+      final news = await webservice.fetchNewsCategory();
+      print('example=====>${news.length}');
+
+      setState(() {
+        _newsCategory = news;
+
+          dropListModel = DropListModel(
+          _newsCategory
+              .map((category) =>
+                  OptionItem( title: category.categoryName))
+              .toList(),
+        );
+        isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print("exception occurs" + e.toString());
+    }
+  }
+
+  Future<void> _fetchNewsList(String name) async {
+    try {
+      setState(() {
+        isLoading = true;
+      });
+      final news = await webservice.fetchNewsList(name);
+      print('getted value==>' + news[0].id.toString());
+      setState(() {
+        _newsList = news;
+        isLoading = false;
+        showList = true;
+      });
+    } catch (e) {
+      setState(() {
+        isLoading = false;
+      });
+      print("exception occurs" + e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -62,49 +120,56 @@ class _NewsListState extends State<NewsList> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                // SizedBox(
-                //   height: 60,
-                //   width: MediaQuery.of(context).size.width,
-                //   child: CustomDropdownSelect<String>(
-                //     items: items,
-                //     value: selectedValue,
-                //     onChanged: _onDropdownChanged,
-                //   ),
-                // ),
                 SelectDropList(
                   itemSelected: optionItemSelected,
-                  dropListModel: dropListModel,
+                  dropListModel: dropListModel ?? DropListModel([]),
                   showIcon: false,
                   showArrowIcon: true,
                   showBorder: true,
                   paddingTop: 0,
                   width: MediaQuery.of(context).size.width,
-                  paddingDropItem: 10,
+                  // paddingDropItem: 10,
                   suffixIcon: Icons.arrow_drop_down,
                   containerPadding: const EdgeInsets.all(10),
                   icon: const Icon(Icons.person, color: Colors.black),
                   onOptionSelected: (optionItem) {
-                    optionItemSelected = optionItem;
-                    setState(() {});
+                    print('itemslected===>' + optionItem.title);
+
+                    setState(() {
+                      optionItemSelected = optionItem;
+                      showList = false;
+                    });
+                    _fetchNewsList(optionItem.title);
                   },
                 ),
-                // SizedBox(
-                //   height: MediaQuery.of(context).size.height,
-                //   child: Expanded( // Use Expanded to take remaining available space
-                //     child: ListView.builder(
-                //       itemCount: 4,
-                //       itemBuilder: (BuildContext context, int index) => NewsItem(),
-                     
-                //     ),
-                //   ),
-                // ),
-                  ListView.builder(
-                  shrinkWrap: true,
-                  physics: ClampingScrollPhysics(),
-                  itemCount: 4,
-                  itemBuilder: (BuildContext context, int index) => NewsItem(),
-                ),
-                
+  
+                showList
+                    ? ListView.builder(
+                        shrinkWrap: true,
+                        physics: const ClampingScrollPhysics(),
+                        itemCount: _newsList.length,
+                        itemBuilder: (BuildContext context, int index) =>
+                            NewsItem(
+                          id: _newsList[index].id,
+                          img: _newsList[index].img,
+                          cat_name: _newsList[index].cat_name,
+                          title: _newsList[index].title,
+                          created_date: _newsList[index].created_date, shorts: _newsList[index].shorts,
+                        ),
+                      )
+                    : isLoading
+                        ? SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.65,
+                            child: const Center(
+                              child: CommonLoader(),
+                            ))
+                        : SizedBox(
+                            height: MediaQuery.of(context).size.height * 0.65,
+                            child: const Center(
+                                child: Text('No item selected',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold)))),
               ],
             ),
           ),
@@ -113,4 +178,3 @@ class _NewsListState extends State<NewsList> {
     );
   }
 }
-

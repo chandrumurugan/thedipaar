@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="gcm_defaultSenderId" translatable="false">1017496235042</string>
+    <string name="google_api_key" translatable="false">AIzaSyCX-wxUqd4VMlJQMRYBnnbGnxWQxIl14Lw</string>
+    <string name="google_app_id" translatable="false">1:1017496235042:android:1bc5aa7878d5e84e70ee7b</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyCX-wxUqd4VMlJQMRYBnnbGnxWQxIl14Lw</string>
+    <string name="google_storage_bucket" translatable="false">thedipaar-news.appspot.com</string>
+    <string name="project_id" translatable="false">thedipaar-news</string>
+</resources>

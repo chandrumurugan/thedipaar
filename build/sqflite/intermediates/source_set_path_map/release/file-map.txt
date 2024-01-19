@@ -1,0 +1,12 @@
+com.tekartik.sqflite-jetified-annotation-experimental-1.1.0-0 /Users/apple/.gradle/caches/transforms-3/069036831117cc06eca2a73844a283ce/transformed/jetified-annotation-experimental-1.1.0/res
+com.tekartik.sqflite-jetified-window-1.0.0-beta04-1 /Users/apple/.gradle/caches/transforms-3/2aba2ef41cd4f9fa34a691e35860786a/transformed/jetified-window-1.0.0-beta04/res
+com.tekartik.sqflite-core-1.6.0-2 /Users/apple/.gradle/caches/transforms-3/2dbdd0d2c2fe9162e8b90fd0788fdb66/transformed/core-1.6.0/res
+com.tekartik.sqflite-jetified-window-java-1.0.0-beta04-3 /Users/apple/.gradle/caches/transforms-3/3b4d7c18250bbadc3835c08fd833b4ca/transformed/jetified-window-java-1.0.0-beta04/res
+com.tekartik.sqflite-main-4 /Users/apple/.pub-cache/hosted/pub.dev/sqflite-2.3.0/android/src/main/res
+com.tekartik.sqflite-release-5 /Users/apple/.pub-cache/hosted/pub.dev/sqflite-2.3.0/android/src/release/res
+com.tekartik.sqflite-pngs-6 /Users/apple/flutter_docs/flutter_projects/thedipaar/build/sqflite/generated/res/pngs/release
+com.tekartik.sqflite-resValues-7 /Users/apple/flutter_docs/flutter_projects/thedipaar/build/sqflite/generated/res/resValues/release
+com.tekartik.sqflite-rs-8 /Users/apple/flutter_docs/flutter_projects/thedipaar/build/sqflite/generated/res/rs/release
+com.tekartik.sqflite-mergeReleaseResources-9 /Users/apple/flutter_docs/flutter_projects/thedipaar/build/sqflite/intermediates/incremental/release/mergeReleaseResources/merged.dir
+com.tekartik.sqflite-mergeReleaseResources-10 /Users/apple/flutter_docs/flutter_projects/thedipaar/build/sqflite/intermediates/incremental/release/mergeReleaseResources/stripped.dir
+com.tekartik.sqflite-merged_res-11 /Users/apple/flutter_docs/flutter_projects/thedipaar/build/sqflite/intermediates/merged_res/release

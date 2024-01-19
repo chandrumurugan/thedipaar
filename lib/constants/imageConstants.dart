@@ -19,6 +19,26 @@ class AppImages{
      static const String product6 = "assets/images/product6.png";
      static const String product7 = "assets/images/product7.png";
      static const String product8 = "assets/images/product8.png";
+       static const String banner11 = "assets/images/banner11.png";
+   static const String banner12 = "assets/images/banner12.png";
+    static const String banner13 = "assets/images/banner13.png";
+     static const String banner14 = "assets/images/banner14.png";
+     static const String newsex = "assets/images/news1.jpeg";
+
+
+     static const String whatsapp = "assets/socialIcons/whatsapp.png";
+     static const String facebook = "assets/socialIcons/facebook.png";
+     static const String google = "assets/socialIcons/google.png";
+     static const String linkedin = "assets/socialIcons/linkedin.png";
+     static const String pinterest = "assets/socialIcons/pinterest.png";
+     static const String twitter = "assets/socialIcons/twitter.png";//thedipaarq //pasi_thedipaarq //fm_thedipaarq //anuthabam_thedipaarq
+
+ 
+ static const String thedipaarq = "assets/images/thedipaarq.png";
+  static const String pasi_thedipaarq = "assets/images/pasi_thedipaarq.png";
+   static const String fm_thedipaarq = "assets/images/fm_thedipaarq.png";
+    static const String anuthabam_thedipaarq = "assets/images/anuthabam_thedipaarq.png";
+
 
 
   

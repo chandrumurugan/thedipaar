@@ -1,9 +1,7 @@
 
 
-import 'package:circular_menu/circular_menu.dart';
-import 'package:flutter/material.dart';
-import 'package:fluentui_system_icons/fluentui_system_icons.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
+import 'package:flutter/material.dart';
 
 
 
@@ -47,7 +45,7 @@ class _CircularMenuFABState extends State<CircularMenuFAB> with SingleTickerProv
           Bubble(
             title:"Directory",
             iconColor :Colors.white,
-            bubbleColor : Colors.red.shade300,
+            bubbleColor : Color(0xff23527C),
             icon:Icons.contacts_outlined,
             titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
             onPress: () {
@@ -58,7 +56,7 @@ class _CircularMenuFABState extends State<CircularMenuFAB> with SingleTickerProv
           Bubble(
             title:"News bits",
             iconColor :Colors.white,
-            bubbleColor : Colors.red.shade300,
+            bubbleColor : Color(0xff23527C),
             icon:Icons.people,
             titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
             onPress: () {
@@ -69,7 +67,7 @@ class _CircularMenuFABState extends State<CircularMenuFAB> with SingleTickerProv
           Bubble(
             title:"TV",
             iconColor :Colors.white,
-            bubbleColor : Colors.red.shade300,
+            bubbleColor : Color(0xff23527C),
             icon:Icons.tv,
             titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
             onPress: () {
@@ -80,7 +78,7 @@ class _CircularMenuFABState extends State<CircularMenuFAB> with SingleTickerProv
             Bubble(
             title:"E-Book",
             iconColor :Colors.white,
-            bubbleColor : Colors.red.shade300,
+            bubbleColor : Color(0xff23527C),
             icon:Icons.book_rounded,
             titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
             onPress: () {
@@ -91,7 +89,7 @@ class _CircularMenuFABState extends State<CircularMenuFAB> with SingleTickerProv
             Bubble(
             title:"FM",
             iconColor :Colors.white,
-            bubbleColor : Colors.red.shade300,
+            bubbleColor : Color(0xff23527C),
             icon:Icons.radio,
             titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
             onPress: () {
@@ -110,7 +108,7 @@ class _CircularMenuFABState extends State<CircularMenuFAB> with SingleTickerProv
               : _animationController!.forward(),
         
         // Floating Action button Icon color
-        iconColor: Colors.red.shade300,
+        iconColor: Color(0xff23527C),
 
         // Flaoting Action button Icon 
         iconData: Icons.ac_unit, 
