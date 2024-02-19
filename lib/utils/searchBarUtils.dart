@@ -35,8 +35,9 @@ class _SearchBarUtilsState extends State<SearchBarUtils> {
     return Container(
       padding: EdgeInsets.all(16.0),
       child: TextFormField(
-        focusNode: _focusNode,
-        autofocus: widget.isEdit,
+        // focusNode: _focusNode,
+        // autofocus: widget.isEdit,
+        readOnly: widget.isEdit,
         decoration: InputDecoration(
           hintText: 'Search directory',
           prefixIcon: Icon(Icons.search),

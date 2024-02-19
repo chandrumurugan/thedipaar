@@ -2,6 +2,8 @@
 
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
+import 'package:thedipaar/utils/samplePlugins.dart';
+import 'package:thedipaar/view/Directory.dart';
 
 
 
@@ -50,19 +52,20 @@ class _CircularMenuFABState extends State<CircularMenuFAB> with SingleTickerProv
             titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
             onPress: () {
               _animationController!.reverse();
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>DirectoryScreen()));
             },
           ),
           // Floating action menu item
-          Bubble(
-            title:"News bits",
-            iconColor :Colors.white,
-            bubbleColor : Color(0xff23527C),
-            icon:Icons.people,
-            titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
-            onPress: () {
-              _animationController!.reverse();
-            },
-          ),
+          // Bubble(
+          //   title:"News bits",
+          //   iconColor :Colors.white,
+          //   bubbleColor : Color(0xff23527C),
+          //   icon:Icons.people,
+          //   titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
+          //   onPress: () {
+          //     _animationController!.reverse();
+          //   },
+          // ),
           //Floating action menu item
           Bubble(
             title:"TV",
@@ -73,6 +76,7 @@ class _CircularMenuFABState extends State<CircularMenuFAB> with SingleTickerProv
             onPress: () {
               // Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => Homepage()));
               _animationController!.reverse();
+               Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewExample(loadUrl: 'http://thedipar.com/tv/',)));
             },
           ),
             Bubble(
@@ -84,6 +88,7 @@ class _CircularMenuFABState extends State<CircularMenuFAB> with SingleTickerProv
             onPress: () {
               // Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => Homepage()));
               _animationController!.reverse();
+               Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewExample(loadUrl: 'https://ebook.thedipaar.ca/',)));
             },
           ),
             Bubble(
@@ -95,6 +100,7 @@ class _CircularMenuFABState extends State<CircularMenuFAB> with SingleTickerProv
             onPress: () {
               // Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => Homepage()));
               _animationController!.reverse();
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewExample(loadUrl: 'https://zeno.fm/radio/thedipaar/',)));
             },
           ),
         ],

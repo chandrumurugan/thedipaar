@@ -3,9 +3,9 @@ import 'package:thedipaar/constants/imageConstants.dart';
 import 'package:thedipaar/modal/directoryListModal.dart';
 import 'package:thedipaar/modal/searchDirectoryModal.dart';
 import 'package:thedipaar/service/web_service.dart';
+import 'package:thedipaar/utils/keyboardUtils.dart';
 import 'package:thedipaar/utils/loaderUtils.dart';
 import 'package:thedipaar/utils/samplePlugins.dart';
-import 'package:thedipaar/utils/searchBarUtils.dart';
 import 'package:field_suggestion/field_suggestion.dart';
 import 'package:thedipaar/utils/toastUtils.dart';
 
@@ -39,7 +39,6 @@ class _SearchDirectoryScreenState extends State<SearchDirectoryScreen> {
     });
     try {
       final news = await webservice.fetchDirectoryList();
-      print('example=====>${news.length}');
 
       setState(() {
         _directoryList = news;
@@ -62,15 +61,14 @@ class _SearchDirectoryScreenState extends State<SearchDirectoryScreen> {
 
     try {
       final response = await webservice.messageUsPost(
-        name: 'good',
-        email: 'murty@gmail.com',
-        subject: 'adssad',
-        comments: 'dassd',
-        phone: '1234567891',
+        name: name,
+        email: email,
+        subject: subject,
+        comments: message,
+        phone: phonenumber,
       );
 
       // Handle the response here
-      print('Response: $response');
       ToastUtil.show("Message sent successfully",1);
 
       setState(() {
@@ -90,7 +88,7 @@ class _SearchDirectoryScreenState extends State<SearchDirectoryScreen> {
     });
     try {
       final news = await webservice.fetchSearchDirectory(id);
-      print('serachList=====>${news.length}');
+
 
       setState(() {
         _searchdirectory = news;
@@ -186,6 +184,7 @@ class _SearchDirectoryScreenState extends State<SearchDirectoryScreen> {
                         textController.selection = TextSelection.fromPosition(
                           TextPosition(offset: textController.text.length),
                         );
+                        KeyboardUtil.hideKeyboard(context);
                         _fetchSearchDirectoryScreen(
                             _directoryList[index].companyId);
                       },
@@ -434,6 +433,8 @@ String? validatePhone(String? value) {
         return StatefulBuilder(
           builder: (context, setState) {
             return AlertDialog(
+              surfaceTintColor: Colors.white,
+              backgroundColor: Colors.white,
               title: const Text(
                   'Please send your short message..!\nWe will get back to you '),
                   icon: IconButton(onPressed: (){ Navigator.of(context).pop();}, icon:  const Icon(Icons.close)),

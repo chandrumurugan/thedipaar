@@ -34,6 +34,12 @@
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/url_launcher_windows-3.1.1" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/video_player_avfoundation-2.5.3" />
       <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/share_plus-7.2.1" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/just_audio-0.9.36" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/audio_session-0.1.18" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/just_audio_web-0.4.9" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/rive_common-0.2.8" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/package_info_plus-5.0.1" />
+      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dev/wakelock_plus-1.1.4" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

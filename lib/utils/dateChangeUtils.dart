@@ -10,8 +10,11 @@ class DateDayConverter {
     Duration difference = now.difference(providedDateTime);
 
     int differenceInDays = difference.inDays;
+  
 
-    if (differenceInDays == 1) {
+    if (differenceInDays == 0) {
+      return 'Today';
+    } else if (differenceInDays == 1) {
       return '1 day ago';
     } else if (differenceInDays < 7) {
       return '$differenceInDays days ago';

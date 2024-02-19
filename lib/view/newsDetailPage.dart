@@ -7,10 +7,13 @@ import 'package:thedipaar/utils/dateChangeUtils.dart';
 import 'package:thedipaar/utils/loaderUtils.dart';
 import 'package:thedipaar/utils/shareUtils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:animations/animations.dart';
+
 
 class NewsDetail extends StatefulWidget {
   final String? id;
-  const NewsDetail({super.key, this.id});
+  final String? img;
+  const NewsDetail({super.key, this.id, this.img});
 
   @override
   State<NewsDetail> createState() => _NewsDetailState();
@@ -28,7 +31,6 @@ class _NewsDetailState extends State<NewsDetail> {
   @override
   void initState() {
     super.initState();
-    print('id====>' + widget.id!);
       
    
     setState(() {
@@ -87,11 +89,13 @@ Future<void> _fetchNewsByDirection(String direction) async {
 
   try {
     final news = await webservice.fetchNews(newId);
+   
     setState(() {
       _news = news;
       providedDateTime = DateTime.parse(news.createdDate.toString());
       timeAgo = DateDayConverter.getTimeDifference(providedDateTime!);
     });
+  
   } catch (e) {
     // Handle error
     print('Error: $e');
@@ -109,6 +113,7 @@ Future<void> _fetchPreviousNews() async {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
          appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
@@ -120,7 +125,7 @@ Future<void> _fetchPreviousNews() async {
       ),
       body: _news != null
           ? _newsContent()
-          : Center(
+          : const Center(
               child: CommonLoader(),
             ),
       floatingActionButton: Padding(
@@ -133,7 +138,7 @@ Future<void> _fetchPreviousNews() async {
               onPressed: () {
                 _fetchPreviousNews();
               },
-              child: Icon(Icons.arrow_back,color: Colors.white,),
+              child: const Icon(Icons.arrow_back,color: Colors.white,),
             ),
             // SizedBox(width: 16),
             FloatingActionButton(
@@ -141,7 +146,7 @@ Future<void> _fetchPreviousNews() async {
               onPressed: () {
                 _fetchNextNews();
               },
-              child: Icon(Icons.arrow_forward,color: Colors.white,),
+              child: const Icon(Icons.arrow_forward,color: Colors.white,),
             ),
           ],
         ),
@@ -157,9 +162,9 @@ Future<void> _fetchPreviousNews() async {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: const SponsorView(),
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: SponsorView(),
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.33,
@@ -187,7 +192,7 @@ Future<void> _fetchPreviousNews() async {
                       ),
                       child: Text(
                         _news!.catName,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
@@ -196,42 +201,42 @@ Future<void> _fetchPreviousNews() async {
                   ),
                   Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.timelapse_outlined,
                         color: Color(0xFFE93314),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 6,
                       ),
                       Text(
                         '${timeAgo!}',
                         style:
-                            TextStyle(color: Color(0xFFE93314), fontSize: 18),
+                            const TextStyle(color: Color(0xFFE93314), fontSize: 18),
                       ),
                     ],
                   )
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   horizontal: 14,
                 ),
                 child: Text(
                   _news!.title,
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 14),
+                padding: const EdgeInsets.symmetric(horizontal: 14),
                 child: SizedBox(
                   child: Text(_news!.description,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         color: Color(0xFFAAAAAA),
                         fontWeight: FontWeight.bold,

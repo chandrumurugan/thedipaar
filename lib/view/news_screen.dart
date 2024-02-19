@@ -17,7 +17,7 @@ class NewsList extends StatefulWidget {
 
 class _NewsListState extends State<NewsList> {
   List<NewsListModal> _newsList = [];
-   List<NewsCategory> _newsCategory = [];
+  List<NewsCategory> _newsCategory = [];
   bool showList = false;
   bool isLoading = false;
 
@@ -28,25 +28,22 @@ class _NewsListState extends State<NewsList> {
     _fetchNewsCategory();
   }
 
- DropListModel? dropListModel;
+  DropListModel? dropListModel;
   OptionItem optionItemSelected = OptionItem(title: "Select categories");
 
-
-    Future<void> _fetchNewsCategory() async {
+  Future<void> _fetchNewsCategory() async {
     setState(() {
       isLoading = true;
     });
     try {
       final news = await webservice.fetchNewsCategory();
-      print('example=====>${news.length}');
 
       setState(() {
         _newsCategory = news;
 
-          dropListModel = DropListModel(
+        dropListModel = DropListModel(
           _newsCategory
-              .map((category) =>
-                  OptionItem( title: category.categoryName))
+              .map((category) => OptionItem(title: category.categoryName))
               .toList(),
         );
         isLoading = false;
@@ -64,8 +61,7 @@ class _NewsListState extends State<NewsList> {
       setState(() {
         isLoading = true;
       });
-      final news = await webservice.fetchNewsList(name);
-      print('getted value==>' + news[0].id.toString());
+      final news = await webservice.fetchNewsList(name,false);
       setState(() {
         _newsList = news;
         isLoading = false;
@@ -86,6 +82,7 @@ class _NewsListState extends State<NewsList> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         centerTitle: true,
+        surfaceTintColor:Colors.white ,
         title: SizedBox(
           height: 50,
           width: 150,
@@ -112,7 +109,7 @@ class _NewsListState extends State<NewsList> {
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    'Dont miss daily news',
+                    "Don't miss out on the daily news",
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -125,15 +122,24 @@ class _NewsListState extends State<NewsList> {
                   dropListModel: dropListModel ?? DropListModel([]),
                   showIcon: false,
                   showArrowIcon: true,
+                  hintColorTitle:  Color(0xFFE93314),
                   showBorder: true,
+                  paddingDropItem:
+                      EdgeInsets.symmetric(vertical: 8, horizontal: 10),
                   paddingTop: 0,
                   width: MediaQuery.of(context).size.width,
+                  textColorItem: Colors.black87,
+                  textSizeItem : 18,
+                  heightBottomContainer: 200,
+                  borderColor:Color(0xFFE93314) ,
                   // paddingDropItem: 10,
                   suffixIcon: Icons.arrow_drop_down,
-                  containerPadding: const EdgeInsets.all(10),
-                  icon: const Icon(Icons.person, color: Colors.black),
+                  containerPadding: const EdgeInsets.symmetric(horizontal: 10),
+                  icon: const Icon(Icons.person, color: Color(0xFFE93314)),
+                  textColorTitle: Colors.black87, // Change color to red (example)
+                  textSizeTitle: 18,
+                  // containerDecoration: BoxDecoration(color: Colors.blue),
                   onOptionSelected: (optionItem) {
-                    print('itemslected===>' + optionItem.title);
 
                     setState(() {
                       optionItemSelected = optionItem;
@@ -142,7 +148,6 @@ class _NewsListState extends State<NewsList> {
                     _fetchNewsList(optionItem.title);
                   },
                 ),
-  
                 showList
                     ? ListView.builder(
                         shrinkWrap: true,
@@ -154,7 +159,8 @@ class _NewsListState extends State<NewsList> {
                           img: _newsList[index].img,
                           cat_name: _newsList[index].cat_name,
                           title: _newsList[index].title,
-                          created_date: _newsList[index].created_date, shorts: _newsList[index].shorts,
+                          created_date: _newsList[index].created_date,
+                          shorts: _newsList[index].shorts,
                         ),
                       )
                     : isLoading

@@ -1,3 +1,6 @@
+
+
+
 class EventsList {
   final String id;
   final String slug;
@@ -8,8 +11,9 @@ class EventsList {
   final String visibility;
   final String createdOn;
   final String updatedOn;
-  final String start_date;
-  final String end_date;
+  final DateTime startDate;
+  final DateTime endDate;
+  final String gmap;
 
   EventsList({
     required this.id,
@@ -21,8 +25,9 @@ class EventsList {
     required this.visibility,
     required this.createdOn,
     required this.updatedOn,
-    required this.start_date,
-    required this.end_date
+    required this.startDate,
+    required this.endDate,
+    required this.gmap
   });
 
   factory EventsList.fromJson(Map<String, dynamic> json) {
@@ -35,7 +40,10 @@ class EventsList {
       heroImage: json['hero_image'] ?? '',
       visibility: json['visibility'] ?? '',
       createdOn: json['created_on'] ?? '',
-      updatedOn: json['updated_on'] ?? '', start_date: json['start_date'] ?? '', end_date:json['end_date'] ?? '',
+      updatedOn: json['updated_on'] ?? '',
+      startDate: DateTime.parse(json['start_date'] ?? ''),
+      endDate: DateTime.parse(json['end_date'] ?? ''), gmap: json['gmap'] ?? '',
     );
   }
 }
+

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:thedipaar/constants/imageConstants.dart';
 
 class CustomAdPopup extends StatelessWidget {
+  const CustomAdPopup({super.key});
+
   @override
   Widget build(BuildContext context) {
     return AlertDialog(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thedipaar/constants/imageConstants.dart';
 import 'package:thedipaar/utils/samplePlugins.dart';
+import 'package:thedipaar/view/Directory.dart';
 import 'package:thedipaar/view/contactUs.dart';
 import 'package:thedipaar/view/dashboard.dart';
 import 'package:thedipaar/view/news_screen.dart';
@@ -37,138 +38,87 @@ _getConfig();
   }
 
   @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      backgroundColor: Color(0xff23527C),
-      width: MediaQuery.of(context).size.width * 0.55,
-      child: Column(
+Widget build(BuildContext context) {
+  return Drawer(
+    backgroundColor: Color(0xff23527C),
+    width: MediaQuery.of(context).size.width * 0.55,
+    child: Column(
+      children: [
+        const SizedBox(
+          height: 30,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Image.asset(AppImages.app_logo,height: 80,width: 120,),
+        ),
+        buildListTile(Icons.list, 'Home', () {
+          navigateWithAnimation(context, DashBoard());
+        }),
+        buildListTile(Icons.list, 'News', () {
+          navigateWithAnimation(context, NewsList());
+        }),
+        buildListTile(Icons.list, 'About us', () {
+          navigateWithAnimation(context, WebViewExample(loadUrl: aboutUsURL!));
+        }),
+        buildListTile(Icons.list, 'Contact us', () {
+          navigateWithAnimation(context, ContactUs());
+        }),
+        buildListTile(Icons.list, 'Directory', () {
+          navigateWithAnimation(context, DirectoryScreen());
+        }),
+        buildListTile(Icons.list, 'TV', () {
+          navigateWithAnimation(context, WebViewExample(loadUrl: 'http://thedipar.com/tv/'));
+        }),
+        buildListTile(Icons.list, 'E-Book', () {
+          navigateWithAnimation(context, WebViewExample(loadUrl: 'https://ebook.thedipaar.ca/'));
+        }),
+        buildListTile(Icons.list, 'FM', () {
+          navigateWithAnimation(context, WebViewExample(loadUrl: 'https://zeno.fm/radio/thedipaar/'));
+        }),
+      ],
+    ),
+  );
+}
+
+Widget buildListTile(IconData icon, String title, void Function()? onTap) {
+  return ListTile(
+    leading: Icon(icon, color: Colors.white),
+    title: Text(title, style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,color: Colors.white)),
+    onTap: onTap,
+    selectedTileColor: Color(0xFFE93314),
+  );
+}
+
+void navigateWithAnimation(BuildContext context, Widget page) {
+  Navigator.of(context).push(PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => page,
+    transitionDuration: Duration(milliseconds: 600),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      // Scale animation
+      var scaleTween = Tween(begin: 0.5, end: 1.0).animate(
+        CurvedAnimation(
+          parent: animation,
+          curve: Interval(0.0, 0.5, curve: Curves.easeInOut),
+        ),
+      );
+
+     
+
+      return Stack(
         children: [
-          const SizedBox(
-            height: 30,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            // child: Row(
-            //   children: [
-            //     CircleAvatar(
-            //       radius: 30,
-            //       backgroundColor: Colors.grey[600],
-            //     ),
-            //     const SizedBox(
-            //       width: 10,
-            //     ),
-            //     const Text(
-            //       'NAME',
-            //       style: TextStyle(fontSize: 12, fontWeight: FontWeight.w900),
-            //     )
-            //   ],
-            // ),
-            child: Image.asset(AppImages.app_logo,height: 80,width: 120,),
-          ),
-          ListTile(
-            leading: const Icon(Icons.list,color:Colors.white ,), // Replace with your icon
-            title: const Text('Home',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,color: Colors.white)),
-            onTap: () {
-              // Handle list item 1 tap
-              // Navigator.push(context, MaterialPageRoute(builder: (context)=>HomeScreen()));
-              // Navigator.pop(context);
-                Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => DashBoard()));
-            },
-          ),
-          ListTile(
-            leading: const Icon(Icons.list,color: Colors.white), // Replace with your icon
-            title: const Text('News',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,color: Colors.white)),
-            onTap: () {
-              // Handle list item 2 tap
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => NewsList()));
-            },
-          ),
-          // ListTile(
-          //   leading: const Icon(Icons.list,color: Color(0xFFE93314)), // Replace with your icon
-          //   title: const Text('events',
-          //       style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,color: Color(0xFFE93314))),
-          //   onTap: () {
-          //     // Handle list item 3 tap
-          //     Navigator.push(
-          //         context, MaterialPageRoute(builder: (context) => Events(back: true,)));
-          //   },
-          // ),
-          ListTile(
-            leading: const Icon(Icons.list,color: Colors.white), // Replace with your icon
-            title: const Text('About us',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,color: Colors.white)),
-            onTap: () {
-              // Handle list item 4 tap
-               Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewExample(loadUrl: aboutUsURL!,)));
-            },
-          ),
-           ListTile(
-            leading: const Icon(Icons.list,color: Colors.white), // Replace with your icon
-            title: const Text('Contact us',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,color: Colors.white)),
-            onTap: () {
-              // Handle list item 4 tap
-              // print('test');
-                Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => ContactUs()));
-              //  Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewExample(loadUrl: contactUsURL!,)));
-          
-            },
-          ),
-            ListTile(
-            leading: const Icon(Icons.list,color: Colors.white), // Replace with your icon
-            title: const Text('Directory',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,color: Colors.white)),
-            onTap: () {
-              // Handle list item 4 tap
-              //  Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewExample(loadUrl: 'https://www.thedipaar.com/about1.php#bypass-sw',)));
-            },
-          ),
-            ListTile(
-            leading: const Icon(Icons.list,color:Colors.white), // Replace with your icon
-            title: const Text('News bits',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,color: Colors.white)),
-            onTap: () {
-              // Handle list item 4 tap
-              //  Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewExample(loadUrl: 'https://www.thedipaar.com/about1.php#bypass-sw',)));
-            },
-          ),
-            ListTile(
-            leading: const Icon(Icons.list,color: Colors.white), // Replace with your icon
-            title: const Text('TV',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,color: Colors.white)),
-            onTap: () {
-              // Handle list item 4 tap
-               Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewExample(loadUrl: 'http://thedipar.com/tv/',)));
-            },
-          ),
-            ListTile(
-            leading: const Icon(Icons.list,color: Colors.white), // Replace with your icon
-            title: const Text('E-Book',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,color: Colors.white)),
-            onTap: () {
-              // Handle list item 4 tap
-               Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewExample(loadUrl: 'https://ebook.thedipaar.ca/',)));
-             
-            },
-          ),
-            ListTile(
-            leading: const Icon(Icons.list,color: Colors.white), // Replace with your icon
-            title: const Text('FM',
-                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500,color: Colors.white)),
-            onTap: () {
-              // Handle list item 4 tap
-               Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewExample(loadUrl: 'https://zeno.fm/radio/thedipaar/',)));
-             
-            },
+          ScaleTransition(
+            scale: scaleTween,
+            child: FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
           ),
         ],
-      ),
-    );
-  }
+      );
+    },
+  ));
+}
+
+
 }
 

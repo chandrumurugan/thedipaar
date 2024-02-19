@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.thedipaar.app-mergeReleaseResources-22:/values-night-v8/values-night-v8.xml",
+            "outputFile": "com.thedipaar.news.app-mergeReleaseResources-14:/values-night-v8/values-night-v8.xml",
             "map": [
                 {
                     "source": "/Users/apple/flutter_docs/flutter_projects/thedipaar/android/app/src/main/res/values-night/styles.xml",

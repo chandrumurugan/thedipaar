@@ -31,6 +31,7 @@ class webservice {
       static const String eventsDetailUrl = "http://52.77.122.228/api/frontend/events/get/";
        static const String messageUsUrl = 'http://52.77.122.228/api/frontend/contactus';
         static const String appconfigUrl = 'http://52.77.122.228/api/frontend/getconfig';
+        static const String newsListAll = "http://52.77.122.228/api/frontend/news/all";
 
   static Future<News> fetchNews(String id) async {
     final response = await http.get(
@@ -48,7 +49,7 @@ class webservice {
     }
   }
 
-    static Future<EventsDetails> fetchEventsDetail(String id) async {
+    static Future<EventDetails> fetchEventsDetail(String id) async {
     final response = await http.get(
       Uri.parse('$eventsDetailUrl$id'),
       // Additional headers or body parameters if needed
@@ -56,8 +57,7 @@ class webservice {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
-      print('detailss=======>$eventsDetailUrl$id');
-      final news = EventsDetails.fromJson(data['data']);
+      final news = EventDetails.fromJson(data['data']);
       return news;
     } else {
       ToastUtil.show("Failed to load news", 0);
@@ -69,7 +69,6 @@ class webservice {
       Uri.parse('$appconfigUrl'),
       // Additional headers or body parameters if needed
     );
-
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
       final news = Appconfig.fromJson(data['data']);
@@ -82,9 +81,9 @@ class webservice {
 
 
 
-  static Future<List<NewsListModal>> fetchNewsList(String name) async {
+  static Future<List<NewsListModal>> fetchNewsList(String name,bool isAll) async {
     final response = await http.get(
-      Uri.parse('$newsListUrl$name'),
+      Uri.parse(isAll ? "${newsListAll}":'$newsListUrl$name'),
     );
 
     
@@ -93,6 +92,7 @@ class webservice {
 
       List<NewsListModal> newsList =
           dataList.map((item) => NewsListModal.fromJson(item)).toList();
+          newsList.sort((a, b) => DateTime.parse(b.created_date).compareTo(DateTime.parse(a.created_date)));
       return newsList;
     } else {
       ToastUtil.show("Failed to load news", 0);
@@ -162,9 +162,6 @@ class webservice {
  
     if (response.statusCode == 200) {
       final List<dynamic> dataList = json.decode(response.body)['data'];
-      for(var res in dataList){
-       print('result===>     ${res.toString()}');
-      }
       List<EventsList> eventsList =
           dataList.map((item) => EventsList.fromJson(item)).toList();
 

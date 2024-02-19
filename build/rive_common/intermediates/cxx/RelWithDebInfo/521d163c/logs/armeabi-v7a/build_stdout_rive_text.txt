@@ -1,0 +1,2 @@
+ninja: Entering directory `/Users/apple/.pub-cache/hosted/pub.dev/rive_common-0.2.8/android/.cxx/RelWithDebInfo/521d163c/armeabi-v7a'
+[1/1] Linking CXX shared library /Users/apple/flutter_docs/flutter_projects/thedipaar/build/rive_common/intermediates/cxx/RelWithDebInfo/521d163c/obj/armeabi-v7a/librive_text.so

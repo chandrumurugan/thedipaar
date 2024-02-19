@@ -64,6 +64,15 @@ class _SponsorViewState extends State<SponsorView> {
               child: Image.network(
                 "http://52.77.122.228/uploads/sponsor/${_sponsers[i].image}",
                 fit: BoxFit.fill,
+                  errorBuilder: (BuildContext context, Object exception,
+                            StackTrace? stackTrace) {
+                          // Return a default image or placeholder widget when an error occurs
+                          return Image.network(
+                            'https://media.gettyimages.com/id/1352266790/vector/sponsor-stamp-imprint-seal-template-grunge-effect-vector-stock-illustration.jpg?s=612x612&w=gi&k=20&c=zE27klszgZg_N_xgAplSLRpb8YEa81pOoIDbZ9N2rec=',
+                            width: MediaQuery.of(context).size.width,
+                            fit: BoxFit.fill,
+                          );
+                        },
               ),
             ),
           ),
@@ -78,6 +87,15 @@ class _SponsorViewState extends State<SponsorView> {
                     child: Image.network(
                       "http://52.77.122.228/uploads/sponsor/${_sponsers[i + 1].image}",
                       fit: BoxFit.fill,
+                        errorBuilder: (BuildContext context, Object exception,
+                            StackTrace? stackTrace) {
+                          // Return a default image or placeholder widget when an error occurs
+                          return Image.network(
+                            'https://media.gettyimages.com/id/1352266790/vector/sponsor-stamp-imprint-seal-template-grunge-effect-vector-stock-illustration.jpg?s=612x612&w=gi&k=20&c=zE27klszgZg_N_xgAplSLRpb8YEa81pOoIDbZ9N2rec=',
+                            width: MediaQuery.of(context).size.width,
+                            fit: BoxFit.fill,
+                          );
+                        },
                     ),
                   )
                 : Container(), // Handles the case when the number of images is odd

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.thedipaar.app-mergeReleaseResources-22:/values-en-rXC/values-en-rXC.xml",
+            "outputFile": "com.thedipaar.news.app-mergeReleaseResources-14:/values-en-rXC/values-en-rXC.xml",
             "map": [
                 {
                     "source": "/Users/apple/.gradle/caches/transforms-3/7ec68f5a63c6385208f2e42afad3fdb2/transformed/browser-1.5.0/res/values-en-rXC/values-en-rXC.xml",

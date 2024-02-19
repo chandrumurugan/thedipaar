@@ -36,9 +36,6 @@ class _SpalshScreenState extends State<SpalshScreen> {
       prefs.setString('aboutus_url', config!.aboutus_url);
       prefs.setString('contactus_url', config!.contactus_url);
       prefs.setString('share_baseurl', config!.share_baseurl);
-      print('${config!.aboutus_url}');
-       print('${config!.contactus_url}');
-        print('${config!.share_baseurl}');
            Timer(Duration(seconds: 5), () {
       Navigator.pushReplacement(
         context,
@@ -48,7 +45,7 @@ class _SpalshScreenState extends State<SpalshScreen> {
     } catch (e) {
       // Handle error
       print('Error: $e');
-    }
+    } 
   }
 
   @override
@@ -56,7 +53,6 @@ class _SpalshScreenState extends State<SpalshScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        // Replace 'your_image_path' with the path to your image asset
         child: Image.asset(
           AppImages.app_logo,
           height: 250,
