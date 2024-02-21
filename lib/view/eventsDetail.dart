@@ -173,7 +173,7 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
                         width: MediaQuery.of(context).size.width,
                         child: Image.network(
                         
-                          "http://52.77.122.228/uploads/events/${_eventsDetail!.heroImage}",
+                          "http://15.156.18.30/uploads/events/${_eventsDetail!.heroImage}",
                           fit: BoxFit.fill,
                           errorBuilder: (BuildContext context, Object exception,
                               StackTrace? stackTrace) {
@@ -194,7 +194,7 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
                             height: MediaQuery.of(context).size.height * 0.25,
                             width: MediaQuery.of(context).size.width,
                             child: Image.network(
-                              "http://52.77.122.228/uploads/events/${_eventsDetail!.gallery[index]}",
+                              "http://15.156.18.30/uploads/events/${_eventsDetail!.gallery[index]}",
                               fit: BoxFit.fill,
                               errorBuilder: (BuildContext context,
                                   Object exception, StackTrace? stackTrace) {
@@ -458,7 +458,7 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
                       // Add share functionality here
                       await ShareUtils.share(
                           _eventsDetail!.heading,
-                         "http://52.77.122.228/uploads/events/${_eventsDetail!.heroImage}",
+                         "http://15.156.18.30/uploads/events/${_eventsDetail!.heroImage}",
                           "https://thedipaar.com/detailevents/${widget.id}");
                     },
                     child: Container(
@@ -485,7 +485,7 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
                         itemCount: _eventsDetail!.gallery.length,
                         builder: (context, index) {
                           return PhotoViewGalleryPageOptions(
-                            imageProvider: NetworkImage("http://52.77.122.228/uploads/events/${_eventsDetail!.gallery[index]}"),
+                            imageProvider: NetworkImage("http://15.156.18.30/uploads/events/${_eventsDetail!.gallery[index]}"),
                             minScale: PhotoViewComputedScale.contained,
                             maxScale: PhotoViewComputedScale.covered * 2,
                             heroAttributes: PhotoViewHeroAttributes(tag: index),

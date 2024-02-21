@@ -21,7 +21,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   void initState() {
     super.initState();
     _controller = VideoPlayerController.networkUrl(
-        Uri.parse('http://52.77.122.228/native/assets/videos/loader.mp4'))
+        Uri.parse('http://15.156.18.30/native/assets/videos/loader.mp4'))
       ..initialize().then((_) {
         _controller.addListener(videoPlayerListener);
 

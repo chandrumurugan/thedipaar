@@ -62,7 +62,7 @@ class _SponsorViewState extends State<SponsorView> {
                 _launchUrl(_sponsers[i].link);
               },
               child: Image.network(
-                "http://52.77.122.228/uploads/sponsor/${_sponsers[i].image}",
+                "http://15.156.18.30/uploads/sponsor/${_sponsers[i].image}",
                 fit: BoxFit.fill,
                   errorBuilder: (BuildContext context, Object exception,
                             StackTrace? stackTrace) {
@@ -85,7 +85,7 @@ class _SponsorViewState extends State<SponsorView> {
                       _launchUrl(_sponsers[i + 1].link);
                     },
                     child: Image.network(
-                      "http://52.77.122.228/uploads/sponsor/${_sponsers[i + 1].image}",
+                      "http://15.156.18.30/uploads/sponsor/${_sponsers[i + 1].image}",
                       fit: BoxFit.fill,
                         errorBuilder: (BuildContext context, Object exception,
                             StackTrace? stackTrace) {

@@ -53,6 +53,7 @@ class _NewsDetailState extends State<NewsDetail> {
       isLoading = true;
     });
     try {
+      print('news123456789==>${widget.id}');
       final news = await webservice.fetchNews(widget.id!);
       setState(() {
         _news = news;
@@ -88,7 +89,9 @@ Future<void> _fetchNewsByDirection(String direction) async {
   });
 
   try {
+    print('newsId==>$newsId');
     final news = await webservice.fetchNews(newId);
+    print('response==>${_news}');
    
     setState(() {
       _news = news;
@@ -98,7 +101,7 @@ Future<void> _fetchNewsByDirection(String direction) async {
   
   } catch (e) {
     // Handle error
-    print('Error: $e');
+    print('Error===>: $e');
   }
 }
 
@@ -169,7 +172,7 @@ Future<void> _fetchPreviousNews() async {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.33,
                 width: MediaQuery.of(context).size.width,
-                child: Image.network("http://52.77.122.228/uploads/news/${_news!.img}", fit: BoxFit.cover),
+                child: Image.network("http://15.156.18.30/uploads/news/${_news!.img}", fit: BoxFit.cover),
               ),
               const SizedBox(
                 height: 16,
@@ -268,7 +271,7 @@ Future<void> _fetchPreviousNews() async {
               // Add share functionality here
               await ShareUtils.share(
                 _news!.title,
-                "http://52.77.122.228/uploads/news/${_news!.img}","${shareBaseURL}${widget.id}"
+                "http://15.156.18.30/uploads/news/${_news!.img}","${shareBaseURL}${widget.id}"
               );
             },
             child: Container(

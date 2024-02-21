@@ -100,7 +100,7 @@ class _NewsItemState extends State<NewsItem> {
                       child: Hero(
                         tag: 'newsImage${widget.id}',
                         child: Image.network(
-                          "http://52.77.122.228/uploads/news/${widget.img}",
+                          "http://15.156.18.30/uploads/news/${widget.img}",
                           width: MediaQuery.of(context).size.width,
                           fit: BoxFit.cover,
                           errorBuilder: (BuildContext context, Object exception,
@@ -210,7 +210,7 @@ class _NewsItemState extends State<NewsItem> {
 
                 await ShareUtils.share(
                     widget.title,
-                    "http://52.77.122.228/uploads/news/${widget.img}",
+                    "http://15.156.18.30/uploads/news/${widget.img}",
                     "${shareBaseURL}${widget.id}");
               },
               child: Container(

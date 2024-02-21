@@ -14,34 +14,39 @@ import 'package:thedipaar/utils/toastUtils.dart';
 
 class webservice {
   static const String newsDetailUrl =
-      'http://52.77.122.228/api/frontend/news/get/';
+      'http://15.156.18.30/api/frontend/news/get/';
   static const String newsListUrl =
-      "http://52.77.122.228/api/frontend/news/category/";
+      "http://15.156.18.30/api/frontend/news/category/";
   static const String newscategoryUrl =
-      "http://52.77.122.228/public/api/frontend/news/categories";
+      "http://15.156.18.30/public/api/frontend/news/categories";
   static const String directoryList =
-      "http://52.77.122.228/api/frontend/directory/get-category";
+      "http://15.156.18.30/api/frontend/directory/get-category";
   static const String searchDirectory =
-      "http://52.77.122.228/api/frontend/directory/get-category-by-sub/";
+      "http://15.156.18.30/api/frontend/directory/get-category-by-sub/";
 
   static const String sponserList =
-      "http://52.77.122.228/api/frontend/sponsor/all";
+      "http://15.156.18.30/api/frontend/sponsor/all";
   static const String eventsList =
-      "http://52.77.122.228/api/frontend/events/all";
-      static const String eventsDetailUrl = "http://52.77.122.228/api/frontend/events/get/";
-       static const String messageUsUrl = 'http://52.77.122.228/api/frontend/contactus';
-        static const String appconfigUrl = 'http://52.77.122.228/api/frontend/getconfig';
-        static const String newsListAll = "http://52.77.122.228/api/frontend/news/all";
+      "http://15.156.18.30/api/frontend/events/all";
+      static const String eventsDetailUrl = "http://15.156.18.30/api/frontend/events/get/";
+       static const String messageUsUrl = 'http://15.156.18.30/api/frontend/contactus';
+        static const String appconfigUrl = 'http://15.156.18.30/api/frontend/getconfig';
+        static const String newsListAll = "http://15.156.18.30/api/frontend/news/all";
 
   static Future<News> fetchNews(String id) async {
+    print('$newsDetailUrl$id');
     final response = await http.get(
       Uri.parse('$newsDetailUrl$id'),
       // Additional headers or body parameters if needed
     );
-
+    print('api response==>$response');
+    
+    
     if (response.statusCode == 200) {
+
       final Map<String, dynamic> data = json.decode(response.body);
       final news = News.fromJson(data['data']);
+
       return news;
     } else {
       ToastUtil.show("Failed to load news", 0);

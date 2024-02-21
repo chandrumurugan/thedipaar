@@ -53,7 +53,7 @@ class _BannerViewState extends State<BannerView> {
         onTap: () {
       
         },
-        child: Image.network("http://52.77.122.228/uploads/sponsor/${_sponsers[i].image}",fit: BoxFit.fill,width: MediaQuery.of(context).size.width,),
+        child: Image.network("http://15.156.18.30/uploads/sponsor/${_sponsers[i].image}",fit: BoxFit.fill,width: MediaQuery.of(context).size.width,),
       ));
     }
     return list;

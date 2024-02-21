@@ -443,7 +443,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                       height: 140,
                       width: MediaQuery.of(context).size.width,
                       child: Image.network(
-                        "http://52.77.122.228/uploads/events/${event.imageUrl}",
+                        "http://15.156.18.30/uploads/events/${event.imageUrl}",
                         width: MediaQuery.of(context).size.width,
                         fit: BoxFit.fill,
                         errorBuilder: (BuildContext context, Object exception,
@@ -533,7 +533,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
             right: MediaQuery.of(context).size.width * 0.06,
             child: GestureDetector(
               onTap: () async {
-                await ShareUtils.share(event.title, "http://52.77.122.228/uploads/events/${event.imageUrl}", "https://thedipaar.com/detailevents/${event.id}");
+                await ShareUtils.share(event.title, "http://15.156.18.30/uploads/events/${event.imageUrl}", "https://thedipaar.com/detailevents/${event.id}");
               },
               child: Container(
                 height: 40,
