@@ -8,6 +8,7 @@ import 'package:thedipaar/utils/loaderUtils.dart';
 import 'package:thedipaar/utils/shareUtils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:animations/animations.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 
 class NewsDetail extends StatefulWidget {
@@ -131,29 +132,29 @@ Future<void> _fetchPreviousNews() async {
           : const Center(
               child: CommonLoader(),
             ),
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            FloatingActionButton(
-              backgroundColor:const Color(0xFFE93314) ,
-              onPressed: () {
-                _fetchPreviousNews();
-              },
-              child: const Icon(Icons.arrow_back,color: Colors.white,),
-            ),
-            // SizedBox(width: 16),
-            FloatingActionButton(
-               backgroundColor:const Color(0xFFE93314) ,
-              onPressed: () {
-                _fetchNextNews();
-              },
-              child: const Icon(Icons.arrow_forward,color: Colors.white,),
-            ),
-          ],
-        ),
-      ),
+      // floatingActionButton: Padding(
+      //   padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1),
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //     children: [
+      //       FloatingActionButton(
+      //         backgroundColor:const Color(0xFFE93314) ,
+      //         onPressed: () {
+      //           _fetchPreviousNews();
+      //         },
+      //         child: const Icon(Icons.arrow_back,color: Colors.white,),
+      //       ),
+      //       // SizedBox(width: 16),
+      //       FloatingActionButton(
+      //          backgroundColor:const Color(0xFFE93314) ,
+      //         onPressed: () {
+      //           _fetchNextNews();
+      //         },
+      //         child: const Icon(Icons.arrow_forward,color: Colors.white,),
+      //       ),
+      //     ],
+      //   ),
+      // ),
     );
   }
 
@@ -172,7 +173,13 @@ Future<void> _fetchPreviousNews() async {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.33,
                 width: MediaQuery.of(context).size.width,
-                child: Image.network("http://15.156.18.30/uploads/news/${_news!.img}", fit: BoxFit.cover),
+                // child: Image.network("http://15.156.18.30/uploads/news/${_news!.img}", fit: BoxFit.cover),
+                child: CachedNetworkImage(
+  imageUrl: "http://15.156.18.30/uploads/news/${widget.img}",
+  placeholder: (context, url) => CircularProgressIndicator(),
+  errorWidget: (context, url, error) => Icon(Icons.error),
+  fit: BoxFit.cover,
+),
               ),
               const SizedBox(
                 height: 16,
