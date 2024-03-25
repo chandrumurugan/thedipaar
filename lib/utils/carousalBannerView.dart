@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:thedipaar/constants/imageConstants.dart';
@@ -42,13 +43,12 @@ class _SponsorViewState extends State<SponsorView> {
     }
   }
 
-
   int _currentSlider = 0;
   Future<void> _launchUrl(String _url) async {
-  if (!await launchUrl(Uri.parse(_url))) {
-    throw Exception('Could not launch $_url');
+    if (!await launchUrl(Uri.parse(_url))) {
+      throw Exception('Could not launch $_url');
+    }
   }
-}
 
   List<Widget> _sponsorViewWidgets() {
     List<Widget> list = [];
@@ -59,24 +59,24 @@ class _SponsorViewState extends State<SponsorView> {
             child: GestureDetector(
               onTap: () {
                 // Handle sponsor tap
+                print('========>${_sponsers[i].link}');
                 _launchUrl(_sponsers[i].link);
               },
-              child: Image.network(
-                "http://15.156.18.30/uploads/sponsor/${_sponsers[i].image}",
+              child: CachedNetworkImage(
+                imageUrl:
+                    "http://thedipaar.com/uploads/sponsor/${_sponsers[i].image}",
                 fit: BoxFit.fill,
-                  errorBuilder: (BuildContext context, Object exception,
-                            StackTrace? stackTrace) {
-                          // Return a default image or placeholder widget when an error occurs
-                          return Image.network(
-                            'https://media.gettyimages.com/id/1352266790/vector/sponsor-stamp-imprint-seal-template-grunge-effect-vector-stock-illustration.jpg?s=612x612&w=gi&k=20&c=zE27klszgZg_N_xgAplSLRpb8YEa81pOoIDbZ9N2rec=',
-                            width: MediaQuery.of(context).size.width,
-                            fit: BoxFit.fill,
-                          );
-                        },
+                placeholder: (context, url) =>
+                    CircularProgressIndicator(color: const Color(0xFFE93314),), // Placeholder widget
+                errorWidget: (context, url, error) => Image.network(
+                  'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.fill,
+                ), // Error widget
               ),
             ),
           ),
-          SizedBox(width: 8), // Adjust the spacing between sponsors
+          SizedBox(width: 8),
           Expanded(
             child: i + 1 < _sponsers.length
                 ? GestureDetector(
@@ -84,18 +84,17 @@ class _SponsorViewState extends State<SponsorView> {
                       // Handle sponsor tap
                       _launchUrl(_sponsers[i + 1].link);
                     },
-                    child: Image.network(
-                      "http://15.156.18.30/uploads/sponsor/${_sponsers[i + 1].image}",
+                    child: CachedNetworkImage(
+                      imageUrl:
+                          "http://thedipaar.com/uploads/sponsor/${_sponsers[i + 1].image}",
                       fit: BoxFit.fill,
-                        errorBuilder: (BuildContext context, Object exception,
-                            StackTrace? stackTrace) {
-                          // Return a default image or placeholder widget when an error occurs
-                          return Image.network(
-                            'https://media.gettyimages.com/id/1352266790/vector/sponsor-stamp-imprint-seal-template-grunge-effect-vector-stock-illustration.jpg?s=612x612&w=gi&k=20&c=zE27klszgZg_N_xgAplSLRpb8YEa81pOoIDbZ9N2rec=',
-                            width: MediaQuery.of(context).size.width,
-                            fit: BoxFit.fill,
-                          );
-                        },
+                      placeholder: (context, url) =>
+                          CircularProgressIndicator(color: const Color(0xFFE93314),), // Placeholder widget
+                      errorWidget: (context, url, error) => Image.network(
+                        'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg',
+                        width: MediaQuery.of(context).size.width,
+                        fit: BoxFit.fill,
+                      ), // Error widget
                     ),
                   )
                 : Container(), // Handles the case when the number of images is odd

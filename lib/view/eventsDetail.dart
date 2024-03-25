@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -37,7 +38,7 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
   @override
   void initState() {
     super.initState();
-    debugPrint("====?${widget.map}");
+    debugPrint("====?${widget.id}");
 
 
     setState(() {
@@ -116,14 +117,12 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
 
   Future<void> _fetchNewsByDirection(String direction) async {
     String newId = eventId!;
-    if (direction == 'next') {
-      int initialIntID = int.tryParse(eventId!) ?? 0;
-      initialIntID++;
-      newId = initialIntID.toString();
-    } else if (direction == 'previous') {
-      int initialIntID = int.tryParse(eventId!) ?? 0;
-      initialIntID--;
-      newId = initialIntID.toString();
+    if (direction == 'next' && _eventsDetail!.next != null) {
+
+      newId = _eventsDetail!.next!.id;
+    } else if (direction == 'previous' && _eventsDetail!.previous != null) {
+
+       newId = _eventsDetail!.previous!.id;
     }
 
     setState(() {
@@ -171,20 +170,32 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
                         // color: Colors.amber,
                         height: MediaQuery.of(context).size.height * 0.25,
                         width: MediaQuery.of(context).size.width,
-                        child: Image.network(
-                        
-                          "http://15.156.18.30/uploads/events/${_eventsDetail!.heroImage}",
-                          fit: BoxFit.fill,
-                          errorBuilder: (BuildContext context, Object exception,
-                              StackTrace? stackTrace) {
-                            // Return a default image or placeholder widget when an error occurs
-                            return Image.network(
-                              'https://www.shutterstock.com/image-photo/concept-image-business-acronym-eod-260nw-332349266.jpg',
-                              width: MediaQuery.of(context).size.width,
-                              fit: BoxFit.fill,
-                            );
-                          },
+                        child: CachedNetworkImage(imageUrl:"http://thedipaar.com/uploads/events/${_eventsDetail!.heroImage}" ,
+                        fit: BoxFit.fill,
+                        placeholder: (context, url) =>
+                    CircularProgressIndicator(color: const Color(0xFFE93314),),
+                                    errorWidget: (context, url, error) => Image.network(
+                  'https://www.shutterstock.com/image-photo/concept-image-business-acronym-eod-260nw-332349266.jpg',
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.fill,
+                ), 
+
+
                         ),
+                        // child: Image.network(
+                        
+                        //   "http://thedipaar.com/uploads/events/${_eventsDetail!.heroImage}",
+                        //   fit: BoxFit.fill,
+                          // errorBuilder: (BuildContext context, Object exception,
+                          //     StackTrace? stackTrace) {
+                        //     // Return a default image or placeholder widget when an error occurs
+                        //     return Image.network(
+                        //       'https://www.shutterstock.com/image-photo/concept-image-business-acronym-eod-260nw-332349266.jpg',
+                        //       width: MediaQuery.of(context).size.width,
+                        //       fit: BoxFit.fill,
+                        //     );
+                        //   },
+                        // ),
                       ):
                       CarouselSlider.builder(
                         itemCount: _eventsDetail!.gallery.length,
@@ -193,18 +204,31 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
                           return SizedBox(
                             height: MediaQuery.of(context).size.height * 0.25,
                             width: MediaQuery.of(context).size.width,
-                            child: Image.network(
-                              "http://15.156.18.30/uploads/events/${_eventsDetail!.gallery[index]}",
-                              fit: BoxFit.fill,
-                              errorBuilder: (BuildContext context,
-                                  Object exception, StackTrace? stackTrace) {
-                                return Image.network(
-                                  'https://www.shutterstock.com/image-photo/concept-image-business-acronym-eod-260nw-332349266.jpg',
-                                  width: MediaQuery.of(context).size.width,
-                                  fit: BoxFit.fill,
-                                );
-                              },
-                            ),
+                             child: CachedNetworkImage(imageUrl:"https://thedipaar.com/uploads/event-gallery/${_eventsDetail!.gallery[index]}" ,
+                        fit: BoxFit.fill,
+                        placeholder: (context, url) =>
+                    CircularProgressIndicator(color: const Color(0xFFE93314),),
+                                    errorWidget: (context, url, error) => Image.network(
+                  'https://www.shutterstock.com/image-photo/concept-image-business-acronym-eod-260nw-332349266.jpg',
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.fill,
+                ), 
+
+
+                        ),
+
+                            // child: Image.network(
+                            //   "https://torontotamilshop.com/uploads/event-gallery/${_eventsDetail!.gallery[index]}",
+                            //   fit: BoxFit.fill,
+                            //   errorBuilder: (BuildContext context,
+                            //       Object exception, StackTrace? stackTrace) {
+                            //     return Image.network(
+                            //       'https://www.shutterstock.com/image-photo/concept-image-business-acronym-eod-260nw-332349266.jpg',
+                            //       width: MediaQuery.of(context).size.width,
+                            //       fit: BoxFit.fill,
+                            //     );
+                            //   },
+                            // ),
                           );
                         },
                         options: CarouselOptions(
@@ -458,7 +482,7 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
                       // Add share functionality here
                       await ShareUtils.share(
                           _eventsDetail!.heading,
-                         "http://15.156.18.30/uploads/events/${_eventsDetail!.heroImage}",
+                         "http://thedipaar.com/uploads/events/${_eventsDetail!.heroImage}",
                           "https://thedipaar.com/detailevents/${widget.id}");
                     },
                     child: Container(
@@ -485,7 +509,7 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
                         itemCount: _eventsDetail!.gallery.length,
                         builder: (context, index) {
                           return PhotoViewGalleryPageOptions(
-                            imageProvider: NetworkImage("http://15.156.18.30/uploads/events/${_eventsDetail!.gallery[index]}"),
+                            imageProvider: NetworkImage("http://thedipaar.com/uploads/events/${_eventsDetail!.gallery[index]}"),
                             minScale: PhotoViewComputedScale.contained,
                             maxScale: PhotoViewComputedScale.covered * 2,
                             heroAttributes: PhotoViewHeroAttributes(tag: index),
@@ -541,7 +565,8 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
         child: showActionButton ?  Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            FloatingActionButton(
+            if(_eventsDetail != null && _eventsDetail!.previous != null) ...[
+                               FloatingActionButton(
               backgroundColor: const Color(0xFFE93314),
               onPressed: () {
                 _fetchPreviousNews();
@@ -551,8 +576,12 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
                 color: Colors.white,
               ),
             ),
-            // SizedBox(width: 16),
-            FloatingActionButton(
+            ],
+              if (_eventsDetail != null && _eventsDetail!.next != null && _eventsDetail!.previous != null) ...[
+            const SizedBox(width: 16), // Add spacing between buttons
+          ],
+                    if (_eventsDetail != null && _eventsDetail!.next != null) ...[
+              FloatingActionButton(
               backgroundColor: const Color(0xFFE93314),
               onPressed: () {
                 _fetchNextNews();
@@ -562,6 +591,7 @@ class _EventsDetailScreenState extends State<EventsDetailScreen> {
                 color: Colors.white,
               ),
             ),
+          ],
           ],
         ) : SizedBox(),
       ),

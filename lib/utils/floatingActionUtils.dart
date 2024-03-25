@@ -19,6 +19,8 @@ class _CircularMenuFABState extends State<CircularMenuFAB> with SingleTickerProv
 
     Animation<double>? _animation;
   AnimationController? _animationController;
+    bool _isDragging = false;
+  Offset _position = Offset(0, 0);
 
   @override
   void initState(){
@@ -39,87 +41,104 @@ class _CircularMenuFABState extends State<CircularMenuFAB> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    return FloatingActionBubble(
-        // Menu items
-        items: <Bubble>[
-
-          // Floating action menu item
-          Bubble(
-            title:"Directory",
-            iconColor :Colors.white,
-            bubbleColor : Color(0xff23527C),
-            icon:Icons.contacts_outlined,
-            titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
-            onPress: () {
-              _animationController!.reverse();
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>DirectoryScreen()));
-            },
-          ),
-          // Floating action menu item
-          // Bubble(
-          //   title:"News bits",
-          //   iconColor :Colors.white,
-          //   bubbleColor : Color(0xff23527C),
-          //   icon:Icons.people,
-          //   titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
-          //   onPress: () {
-          //     _animationController!.reverse();
-          //   },
-          // ),
-          //Floating action menu item
-          Bubble(
-            title:"TV",
-            iconColor :Colors.white,
-            bubbleColor : Color(0xff23527C),
-            icon:Icons.tv,
-            titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
-            onPress: () {
-              // Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => Homepage()));
-              _animationController!.reverse();
-               Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewExample(loadUrl: 'http://thedipar.com/tv/',)));
-            },
-          ),
+    return GestureDetector(
+              onPanStart: (details) {
+          setState(() {
+            _isDragging = true;
+          });
+        },
+        onPanUpdate: (details) {
+          setState(() {
+            _position += details.delta;
+          });
+        },
+        onPanEnd: (details) {
+          setState(() {
+            _isDragging = false;
+          });
+        },
+      child: FloatingActionBubble(
+          // Menu items
+          items: <Bubble>[
+      
+            // Floating action menu item
             Bubble(
-            title:"E-Book",
-            iconColor :Colors.white,
-            bubbleColor : Color(0xff23527C),
-            icon:Icons.book_rounded,
-            titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
-            onPress: () {
-              // Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => Homepage()));
-              _animationController!.reverse();
-               Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewExample(loadUrl: 'https://ebook.thedipaar.ca/',)));
-            },
-          ),
+              title:"Directory",
+              iconColor :Colors.white,
+              bubbleColor : Color(0xff23527C),
+              icon:Icons.contacts_outlined,
+              titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
+              onPress: () {
+                _animationController!.reverse();
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>DirectoryScreen()));
+              },
+            ),
+            // Floating action menu item
+            // Bubble(
+            //   title:"News bits",
+            //   iconColor :Colors.white,
+            //   bubbleColor : Color(0xff23527C),
+            //   icon:Icons.people,
+            //   titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
+            //   onPress: () {
+            //     _animationController!.reverse();
+            //   },
+            // ),
+            //Floating action menu item
             Bubble(
-            title:"FM",
-            iconColor :Colors.white,
-            bubbleColor : Color(0xff23527C),
-            icon:Icons.radio,
-            titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
-            onPress: () {
-              // Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => Homepage()));
-              _animationController!.reverse();
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewExample(loadUrl: 'https://zeno.fm/radio/thedipaar/',)));
-            },
-          ),
-        ],
-
-        // animation controller
-        animation: _animation!,
-
-        // On pressed change animation state
-        onPress: () => _animationController!.isCompleted
-              ? _animationController!.reverse()
-              : _animationController!.forward(),
-        
-        // Floating Action button Icon color
-        iconColor: Color(0xff23527C),
-
-        // Flaoting Action button Icon 
-        iconData: Icons.ac_unit, 
-        backGroundColor: Colors.white,
-      );
+              title:"TV",
+              iconColor :Colors.white,
+              bubbleColor : Color(0xff23527C),
+              icon:Icons.tv,
+              titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
+              onPress: () {
+                // Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => Homepage()));
+                _animationController!.reverse();
+                 Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewExample(loadUrl: 'http://thedipar.com/tv/',)));
+              },
+            ),
+              Bubble(
+              title:"E-Book",
+              iconColor :Colors.white,
+              bubbleColor : Color(0xff23527C),
+              icon:Icons.book_rounded,
+              titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
+              onPress: () {
+                // Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => Homepage()));
+                _animationController!.reverse();
+                 Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewExample(loadUrl: 'https://ebook.thedipaar.ca/',)));
+              },
+            ),
+              Bubble(
+              title:"FM",
+              iconColor :Colors.white,
+              bubbleColor : Color(0xff23527C),
+              icon:Icons.radio,
+              titleStyle:TextStyle(fontSize: 16 , color: Colors.white),
+              onPress: () {
+                // Navigator.push(context, new MaterialPageRoute(builder: (BuildContext context) => Homepage()));
+                _animationController!.reverse();
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>WebViewExample(loadUrl: 'https://zeno.fm/radio/thedipaar/',)));
+              },
+            ),
+          ],
+      
+          // animation controller
+          animation: _animation!,
+      
+          // On pressed change animation state
+          onPress: () => _animationController!.isCompleted
+                ? _animationController!.reverse()
+                : _animationController!.forward(),
+          
+          // Floating Action button Icon color
+          iconColor: Color(0xff23527C),
+      
+          // Flaoting Action button Icon 
+          iconData: Icons.ac_unit, 
+          backGroundColor: Colors.white,
+        ),
+    );
     
   }
 }

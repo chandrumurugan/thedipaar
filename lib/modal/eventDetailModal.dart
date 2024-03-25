@@ -14,6 +14,8 @@ class EventDetails {
   final String createdOn;
   final String updatedOn;
   final List<dynamic> gallery;
+    final Previous? previous;
+  final Next? next;
 
   EventDetails({
     required this.id,
@@ -31,6 +33,7 @@ class EventDetails {
     required this.createdOn,
     required this.updatedOn,
     required this.gallery,
+  required  this.previous,required this.next, 
   });
 
   factory EventDetails.fromJson(Map<String, dynamic> json) {
@@ -50,6 +53,37 @@ class EventDetails {
       createdOn: json['created_on'] ?? '',
       updatedOn: json['updated_on'] ?? '',
       gallery: json['gallery'] ?? [],
+       previous: json['previous'] != null ? Previous.fromJson(json['previous']) : null,
+      next: json['next'] != null ? Next.fromJson(json['next']) : null,
+    );
+  }
+}
+
+
+class Previous {
+  final String id;
+
+  Previous({
+    required this.id,
+  });
+
+  factory Previous.fromJson(Map<String, dynamic> json) {
+    return Previous(
+      id: json['id'],
+    );
+  }
+}
+
+class Next {
+  final String id;
+
+  Next({
+    required this.id,
+  });
+
+  factory Next.fromJson(Map<String, dynamic> json) {
+    return Next(
+      id: json['id'],
     );
   }
 }

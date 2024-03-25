@@ -74,35 +74,29 @@ class _NewsDetailState extends State<NewsDetail> {
   }
 
 Future<void> _fetchNewsByDirection(String direction) async {
-  String newId = newsId!;
-  if (direction == 'next') {
-    int initialIntID = int.tryParse(newsId!) ?? 0;
-    initialIntID++;
-    newId = initialIntID.toString();
-  } else if (direction == 'previous') {
-    int initialIntID = int.tryParse(newsId!) ?? 0;
-    initialIntID--;
-    newId = initialIntID.toString();
-  }
-
-  setState(() {
-    newsId = newId;
-  });
-
   try {
-    print('newsId==>$newsId');
+    String newId = newsId!;
+    if (direction == 'next' && _news!.next != null) {
+      newId = _news!.next!.id;
+    } else if (direction == 'previous' && _news!.previous != null) {
+      newId = _news!.previous!.id;
+    } else {
+      return; // No next or previous news available
+    }
+
+    setState(() {
+      newsId = newId;
+    });
+
     final news = await webservice.fetchNews(newId);
-    print('response==>${_news}');
-   
     setState(() {
       _news = news;
       providedDateTime = DateTime.parse(news.createdDate.toString());
       timeAgo = DateDayConverter.getTimeDifference(providedDateTime!);
     });
-  
   } catch (e) {
     // Handle error
-    print('Error===>: $e');
+    print('Error: $e');
   }
 }
 
@@ -132,29 +126,35 @@ Future<void> _fetchPreviousNews() async {
           : const Center(
               child: CommonLoader(),
             ),
-      // floatingActionButton: Padding(
-      //   padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1),
-      //   child: Row(
-      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      //     children: [
-      //       FloatingActionButton(
-      //         backgroundColor:const Color(0xFFE93314) ,
-      //         onPressed: () {
-      //           _fetchPreviousNews();
-      //         },
-      //         child: const Icon(Icons.arrow_back,color: Colors.white,),
-      //       ),
-      //       // SizedBox(width: 16),
-      //       FloatingActionButton(
-      //          backgroundColor:const Color(0xFFE93314) ,
-      //         onPressed: () {
-      //           _fetchNextNews();
-      //         },
-      //         child: const Icon(Icons.arrow_forward,color: Colors.white,),
-      //       ),
-      //     ],
-      //   ),
-      // ),
+      floatingActionButton:Padding(
+      padding: EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.1),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          if (_news != null && _news!.previous != null) ...[
+            FloatingActionButton(
+              backgroundColor: const Color(0xFFE93314),
+              onPressed: () {
+                _fetchNewsByDirection('previous');
+              },
+              child: const Icon(Icons.arrow_back, color: Colors.white,),
+            ),
+          ],
+          if (_news != null && _news!.next != null && _news!.previous != null) ...[
+            const SizedBox(width: 16), // Add spacing between buttons
+          ],
+          if (_news != null && _news!.next != null) ...[
+            FloatingActionButton(
+              backgroundColor: const Color(0xFFE93314),
+              onPressed: () {
+                _fetchNewsByDirection('next');
+              },
+              child: const Icon(Icons.arrow_forward, color: Colors.white,),
+            ),
+          ],
+        ],
+      ),
+    ),
     );
   }
 
@@ -173,10 +173,10 @@ Future<void> _fetchPreviousNews() async {
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.33,
                 width: MediaQuery.of(context).size.width,
-                // child: Image.network("http://15.156.18.30/uploads/news/${_news!.img}", fit: BoxFit.cover),
+                // child: Image.network("http://thedipaar.com/uploads/news/${_news!.img}", fit: BoxFit.cover),
                 child: CachedNetworkImage(
-  imageUrl: "http://15.156.18.30/uploads/news/${widget.img}",
-  placeholder: (context, url) => CircularProgressIndicator(),
+  imageUrl: "http://thedipaar.com/uploads/news/${_news!.img}",
+  placeholder: (context, url) => CircularProgressIndicator(color: const Color(0xFFE93314),),
   errorWidget: (context, url, error) => Icon(Icons.error),
   fit: BoxFit.cover,
 ),
@@ -256,20 +256,20 @@ Future<void> _fetchPreviousNews() async {
             ],
           ),
         ),
-        // Positioned(
-        //   top: 40,
-        //   left: 20,
-        //   child: GestureDetector(
-        //     onTap: () {
-        //       Navigator.of(context).pop(); // Add navigation logic here
-        //     },
-        //     child: const Icon(
-        //       Icons.arrow_back,
-        //       color: Colors.white,
-        //       size: 30,
-        //     ),
-        //   ),
-        // ),
+        Positioned(
+          top: 40,
+          left: 20,
+          child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).pop(); // Add navigation logic here
+            },
+            child: const Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+              size: 30,
+            ),
+          ),
+        ),
         Positioned(
           top: MediaQuery.of(context).size.height * 0.42,
           right: 30,
@@ -278,7 +278,7 @@ Future<void> _fetchPreviousNews() async {
               // Add share functionality here
               await ShareUtils.share(
                 _news!.title,
-                "http://15.156.18.30/uploads/news/${_news!.img}","${shareBaseURL}${widget.id}"
+                "http://thedipaar.com/uploads/news/${_news!.img}","${shareBaseURL}${widget.id}"
               );
             },
             child: Container(

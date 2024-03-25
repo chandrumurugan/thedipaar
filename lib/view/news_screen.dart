@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:thedipaar/constants/imageConstants.dart';
 import 'package:dropdown_model_list/dropdown_model_list.dart';
 import 'package:flutter/foundation.dart';
@@ -7,6 +8,7 @@ import 'package:thedipaar/modal/newsListModal.dart';
 import 'package:thedipaar/utils/loaderUtils.dart';
 import 'package:thedipaar/utils/newsItemContainer.dart';
 import 'package:thedipaar/service/web_service.dart';
+import 'package:thedipaar/utils/shareUtils.dart';
 
 class NewsList extends StatefulWidget {
   const NewsList({Key? key}) : super(key: key);
@@ -20,12 +22,21 @@ class _NewsListState extends State<NewsList> {
   List<NewsCategory> _newsCategory = [];
   bool showList = false;
   bool isLoading = false;
+  String? shareBaseURL;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _fetchNewsCategory();
+      _getconfig();
+  }
+
+     _getconfig() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      shareBaseURL = prefs.getString('share_baseurl');
+    });
   }
 
   DropListModel? dropListModel;
@@ -61,7 +72,7 @@ class _NewsListState extends State<NewsList> {
       setState(() {
         isLoading = true;
       });
-      final news = await webservice.fetchNewsList(name,false);
+      final news = await webservice.fetchNewsList(name);
       setState(() {
         _newsList = news;
         isLoading = false;
@@ -160,7 +171,12 @@ class _NewsListState extends State<NewsList> {
                           cat_name: _newsList[index].cat_name,
                           title: _newsList[index].title,
                           created_date: _newsList[index].created_date,
-                          shorts: _newsList[index].shorts,
+                          shorts: _newsList[index].shorts, onShare: ()async { 
+ await ShareUtils.share(
+              _newsList[index].title,
+              "http://thedipaar.com/uploads/news/${_newsList[index].img}",
+              "${shareBaseURL}${_newsList[index].id}");
+                           },
                         ),
                       )
                     : isLoading

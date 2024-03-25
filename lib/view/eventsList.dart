@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -396,6 +397,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                   }
                   return ListView.separated(
                     itemCount: value.length,
+                    shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return eventsView(value[index]);
                     },
@@ -442,19 +444,31 @@ class _TableEventsExampleState extends State<TableEventsExample> {
                     SizedBox(
                       height: 140,
                       width: MediaQuery.of(context).size.width,
-                      child: Image.network(
-                        "http://15.156.18.30/uploads/events/${event.imageUrl}",
-                        width: MediaQuery.of(context).size.width,
-                        fit: BoxFit.fill,
-                        errorBuilder: (BuildContext context, Object exception,
-                            StackTrace? stackTrace) {
-                          return Image.network(
-                            'https://www.shutterstock.com/image-photo/concept-image-business-acronym-eod-260nw-332349266.jpg',
-                            width: MediaQuery.of(context).size.width,
-                            fit: BoxFit.fill,
-                          );
-                        },
+                      child: CachedNetworkImage(
+                        fit: BoxFit.cover,
+                        imageUrl:  "http://thedipaar.com/uploads/events/${event.imageUrl}",
+                        placeholder: (context, url) => CircularProgressIndicator(color: const Color(0xFFE93314),),
+                         errorWidget: (context, url, error) => Image.network(
+                 'https://www.shutterstock.com/image-photo/concept-image-business-acronym-eod-260nw-332349266.jpg',
+                  width: MediaQuery.of(context).size.width,
+                  fit: BoxFit.fill,
+                ),
+
+
                       ),
+                      // child: Image.network(
+                      //   "http://thedipaar.com/uploads/events/${event.imageUrl}",
+                      //   width: MediaQuery.of(context).size.width,
+                      //   fit: BoxFit.fill,
+                      //   errorBuilder: (BuildContext context, Object exception,
+                      //       StackTrace? stackTrace) {
+                      //     return Image.network(
+                      //       'https://www.shutterstock.com/image-photo/concept-image-business-acronym-eod-260nw-332349266.jpg',
+                      //       width: MediaQuery.of(context).size.width,
+                      //       fit: BoxFit.fill,
+                      //     );
+                      //   },
+                      // ),
                     ),
                     const SizedBox(
                       height: 10,
@@ -533,7 +547,7 @@ class _TableEventsExampleState extends State<TableEventsExample> {
             right: MediaQuery.of(context).size.width * 0.06,
             child: GestureDetector(
               onTap: () async {
-                await ShareUtils.share(event.title, "http://15.156.18.30/uploads/events/${event.imageUrl}", "https://thedipaar.com/detailevents/${event.id}");
+                await ShareUtils.share(event.title, "http://thedipaar.com/uploads/events/${event.imageUrl}", "https://thedipaar.com/detailevents/${event.id}");
               },
               child: Container(
                 height: 40,

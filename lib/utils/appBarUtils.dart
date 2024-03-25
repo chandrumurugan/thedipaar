@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:thedipaar/constants/imageConstants.dart';
+import 'package:flutter/foundation.dart' show kDebugMode;
 
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -28,6 +29,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           );
         },
       ),
+      automaticallyImplyLeading: kDebugMode,
       title: SizedBox(
         height: 50,
         width: 150,

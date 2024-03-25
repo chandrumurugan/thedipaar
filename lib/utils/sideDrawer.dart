@@ -4,6 +4,7 @@ import 'package:thedipaar/utils/samplePlugins.dart';
 import 'package:thedipaar/view/Directory.dart';
 import 'package:thedipaar/view/contactUs.dart';
 import 'package:thedipaar/view/dashboard.dart';
+import 'package:thedipaar/view/dashboardNew.dart';
 import 'package:thedipaar/view/news_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,7 +35,7 @@ _getConfig();
  contactUsURL = prefs.getString('contactus_url');
     });
 
- 
+ print('aboutus===>${aboutUsURL}');
   }
 
   @override
@@ -52,13 +53,16 @@ Widget build(BuildContext context) {
           child: Image.asset(AppImages.app_logo,height: 80,width: 120,),
         ),
         buildListTile(Icons.list, 'Home', () {
-          navigateWithAnimation(context, DashBoard());
+          navigateWithAnimation(context, DashBoardNew());
         }),
         buildListTile(Icons.list, 'News', () {
           navigateWithAnimation(context, NewsList());
         }),
         buildListTile(Icons.list, 'About us', () {
           navigateWithAnimation(context, WebViewExample(loadUrl: aboutUsURL!));
+        }),
+         buildListTile(Icons.list, 'Privacy policy', () {
+          navigateWithAnimation(context, WebViewExample(loadUrl: "https://thedipaar.com/privacy-policy"));
         }),
         buildListTile(Icons.list, 'Contact us', () {
           navigateWithAnimation(context, ContactUs());

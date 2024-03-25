@@ -14,24 +14,24 @@ import 'package:thedipaar/utils/toastUtils.dart';
 
 class webservice {
   static const String newsDetailUrl =
-      'http://15.156.18.30/api/frontend/news/get/';
+      'http://thedipaar.com/api/frontend/news/get/';
   static const String newsListUrl =
-      "http://15.156.18.30/api/frontend/news/category/";
+      "http://thedipaar.com/api/frontend/news/category/";
   static const String newscategoryUrl =
-      "http://15.156.18.30/public/api/frontend/news/categories";
+      "http://thedipaar.com/public/api/frontend/news/categories";
   static const String directoryList =
-      "http://15.156.18.30/api/frontend/directory/get-category";
+      "http://thedipaar.com/api/frontend/directory/get-category";
   static const String searchDirectory =
-      "http://15.156.18.30/api/frontend/directory/get-category-by-sub/";
+      "http://thedipaar.com/api/frontend/directory/get-category-by-sub/";
 
   static const String sponserList =
-      "http://15.156.18.30/api/frontend/sponsor/all";
+      "http://thedipaar.com/api/frontend/sponsor/all";
   static const String eventsList =
-      "http://15.156.18.30/api/frontend/events/all";
-      static const String eventsDetailUrl = "http://15.156.18.30/api/frontend/events/get/";
-       static const String messageUsUrl = 'http://15.156.18.30/api/frontend/contactus';
-        static const String appconfigUrl = 'http://15.156.18.30/api/frontend/getconfig';
-        static const String newsListAll = "http://15.156.18.30/api/frontend/news/all";
+      "http://thedipaar.com/api/frontend/events/all";
+      static const String eventsDetailUrl = "http://thedipaar.com/api/frontend/events/get/";
+       static const String messageUsUrl = 'http://thedipaar.com/api/frontend/contactus';
+        static const String appconfigUrl = 'http://thedipaar.com/api/frontend/getconfig';
+        static const String newsListAll = "http://thedipaar.com/api/frontend/news/all";
 
   static Future<News> fetchNews(String id) async {
     print('$newsDetailUrl$id');
@@ -55,6 +55,7 @@ class webservice {
   }
 
     static Future<EventDetails> fetchEventsDetail(String id) async {
+      print('eventdetail===>$eventsDetailUrl$id');
     final response = await http.get(
       Uri.parse('$eventsDetailUrl$id'),
       // Additional headers or body parameters if needed
@@ -86,9 +87,10 @@ class webservice {
 
 
 
-  static Future<List<NewsListModal>> fetchNewsList(String name,bool isAll) async {
+  static Future<List<NewsListModal>> fetchNewsList(String name,) async {
+    print('categoryname=====>$newsListUrl$name');
     final response = await http.get(
-      Uri.parse(isAll ? "${newsListAll}":'$newsListUrl$name'),
+      Uri.parse( '$newsListUrl$name'),
     );
 
     
@@ -98,6 +100,31 @@ class webservice {
       List<NewsListModal> newsList =
           dataList.map((item) => NewsListModal.fromJson(item)).toList();
           newsList.sort((a, b) => DateTime.parse(b.created_date).compareTo(DateTime.parse(a.created_date)));
+          for(var res in newsList){
+            print('reslut====>${res.cat_name}');
+          }
+      return newsList;
+    } else {
+      ToastUtil.show("Failed to load news", 0);
+      throw Exception('Failed to load news');
+    }
+  }
+
+    static Future<List<NewsListModal>> fetchNewsListAll() async {
+    final response = await http.get(
+      Uri.parse( "${newsListAll}"),
+    );
+
+    
+    if (response.statusCode == 200) {
+      final List<dynamic> dataList = json.decode(response.body)['data']['posts'];
+
+      List<NewsListModal> newsList =
+          dataList.map((item) => NewsListModal.fromJson(item)).toList();
+          newsList.sort((a, b) => DateTime.parse(b.created_date).compareTo(DateTime.parse(a.created_date)));
+          for(var res in newsList){
+            print('reslut====>${res.cat_name}');
+          }
       return newsList;
     } else {
       ToastUtil.show("Failed to load news", 0);
@@ -166,7 +193,7 @@ class webservice {
 
  
     if (response.statusCode == 200) {
-      final List<dynamic> dataList = json.decode(response.body)['data'];
+      final List<dynamic> dataList = json.decode(response.body)['data']["events"];
       List<EventsList> eventsList =
           dataList.map((item) => EventsList.fromJson(item)).toList();
 
